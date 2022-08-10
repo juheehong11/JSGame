@@ -2,7 +2,7 @@
 
 const canvas = document.getElementById("canvas1");
 const ctx = canvas.getContext("2d");
-const numberOfEnemies = 20;
+const numberOfEnemies = 10;
 const enemiesArray = [];
 CANVAS_WIDTH = canvas.width = 500;
 CANVAS_HEIGHT = canvas.height = 1000;
@@ -11,10 +11,10 @@ let gameFrame = 0;
 class Enemy {
     constructor() {
         this.image = new Image();
-        this.image.src = 'enemies/enemy2.png';
-        this.speed = Math.random() * 4 + 1;
-        this.spriteWidth = 266;
-        this.spriteHeight = 188;
+        this.image.src = 'enemies/enemy1.png';
+        this.speed = Math.random() * 4 - 2;
+        this.spriteWidth = 293;
+        this.spriteHeight = 155;
         const div = Math.random()*1 + 1.5;
         this.width = this.spriteWidth / div;
         this.height = this.spriteHeight / div;
@@ -22,15 +22,10 @@ class Enemy {
         this.y = Math.random() * (canvas.height - this.height);
         this.frame = 0; // frame index
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
-        this.angle = 0; // Math.random()*2;
-        this.angleSpeed = Math.random()*0.2;
-        this.curve = Math.random() * 7;
     }
     update() {
-        this.x -= this.speed; 
-        if (this.x + this.width < 0) this.x = canvas.width;
-        this.angle += this.angleSpeed;
-        this.y += this.curve * Math.sin(this.angle);
+        this.x += Math.random() * 7 - 3.5; // this.speed;
+        this.y += Math.random() * 5 - 2.5; // this.speed;
         // animate sprites
         if (gameFrame % this.flapSpeed === 0) {
             this.frame > 4 ? this.frame = 0 : this.frame++;
