@@ -1,14 +1,14 @@
-/** @type {HTMLCanvasElement} */
+/** @type {HTMLcanvas2Element} */
 
-const canvas = document.getElementById("canvas1");
-const ctx = canvas.getContext("2d");
-const numberOfEnemies = 20;
-const enemiesArray = [];
-CANVAS_WIDTH = canvas.width = 500;
-CANVAS_HEIGHT = canvas.height = 1000;
-let gameFrame = 0;
+const canvas2 = document.getElementById("canvas2");
+const ctx2 = canvas2.getContext("2d");
+const numberofEnemies2 = 20;
+const enemiesArray2 = [];
+canvas2_WIDTH = canvas2.width = 500;
+canvas2_HEIGHT = canvas2.height = 1000;
+let gameFrame2 = 0;
 
-class Enemy {
+class Enemy2 {
     constructor() {
         this.image = new Image();
         this.image.src = 'enemies/enemy2.png';
@@ -18,8 +18,8 @@ class Enemy {
         const div = Math.random()*1 + 1.5;
         this.width = this.spriteWidth / div;
         this.height = this.spriteHeight / div;
-        this.x = Math.random() * (canvas.width - this.width);
-        this.y = Math.random() * (canvas.height - this.height);
+        this.x = Math.random() * (canvas2.width - this.width);
+        this.y = Math.random() * (canvas2.height - this.height);
         this.frame = 0; // frame index
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
         this.angle = 0; // Math.random()*2;
@@ -28,30 +28,30 @@ class Enemy {
     }
     update() {
         this.x -= this.speed; 
-        if (this.x + this.width < 0) this.x = canvas.width;
+        if (this.x + this.width < 0) this.x = canvas2.width;
         this.angle += this.angleSpeed;
         this.y += this.curve * Math.sin(this.angle);
         // animate sprites
-        if (gameFrame % this.flapSpeed === 0) {
+        if (gameFrame2 % this.flapSpeed === 0) {
             this.frame > 4 ? this.frame = 0 : this.frame++;
         }
     }
     draw() {
-        ctx.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+        ctx2.drawImage(this.image, this.frame * this.spriteWidth, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
     }
 }
 
-for (let i = 0; i < numberOfEnemies; i++) {
-    enemiesArray.push(new Enemy());
+for (let i = 0; i < numberofEnemies2; i++) {
+    enemiesArray2.push(new Enemy2());
 }
 
-function animate() {
-    ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
-    enemiesArray.forEach(enemy => {
+function animate2() {
+    ctx2.clearRect(0, 0, canvas2_WIDTH, canvas2_HEIGHT);
+    enemiesArray2.forEach(enemy => {
         enemy.update();
         enemy.draw();
     });
-    gameFrame++;
-    requestAnimationFrame(animate);
+    gameFrame2++;
+    requestAnimationFrame(animate2);
 };
-animate();
+animate2();

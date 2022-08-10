@@ -1,9 +1,20 @@
-#canvas1{
+canvas {
     border: 3px solid black;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
     height: 1000px;
     width: 500px;
+}
+#canvas1{
+    transform: translate(-200%, -50%);
+}
+#canvas2{
+    transform: translate(-100%, -50%);
+}
+#canvas3{
+    transform: translate(0%, -50%);
+}
+#canvas4{
+    transform: translate(100%, -50%);
 }
