@@ -27,10 +27,8 @@ class Enemy {
         this.curve = Math.random() * 200 + 50;
     }
     update() {
-        //this.x -= this.speed; 
-        //this.y += this.curve * Math.sin(this.angle);
-        this.x = canvas.width/2 * Math.sin(this.angle * Math.PI/90) + canvas.width/2 - this.width/2;
-        this.y = canvas.height/2 * Math.cos(this.angle * Math.PI/180) + canvas.height/2 - this.height/2;
+        this.x = this.curve* Math.sin(this.angle * Math.PI/90) + canvas.width/2 - this.width/2;
+        this.y = this.curve * Math.cos(this.angle * Math.PI/180) + canvas.height/2 - this.height/2;
         if (this.x + this.width < 0) this.x = canvas.width;
         this.angle += this.angleSpeed;
         // animate sprites
