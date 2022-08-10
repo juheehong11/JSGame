@@ -15,16 +15,17 @@ class Enemy {
         this.speed = Math.random() * 4 - 2;
         this.spriteWidth = 293;
         this.spriteHeight = 155;
-        this.width = this.spriteWidth / 2.5;
-        this.height = this.spriteHeight / 2.5;
+        const div = Math.random()*1 + 1.5;
+        this.width = this.spriteWidth / div;
+        this.height = this.spriteHeight / div;
         this.x = Math.random() * (canvas.width - this.width);
         this.y = Math.random() * (canvas.height - this.height);
         this.frame = 0; // frame index
         this.flapSpeed = Math.floor(Math.random() * 3 + 1);
     }
     update() {
-        this.x += this.speed;
-        this.y += this.speed;
+        this.x += Math.random() * 7 - 3.5; // this.speed;
+        this.y += Math.random() * 5 - 2.5; // this.speed;
         // animate sprites
         if (gameFrame % this.flapSpeed === 0) {
             this.frame > 4 ? this.frame = 0 : this.frame++;
