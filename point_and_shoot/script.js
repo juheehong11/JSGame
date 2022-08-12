@@ -10,20 +10,26 @@ let lastTime = 0;
 let ravens = [];
 class Raven {
     constructor() {
-        this.width = 100;
-        this.height = 50;
+        this.spriteWidth = 271;
+        this.spriteHeight = 194;
+        this.width = this.spriteWidth/2;
+        this.height = this.spriteHeight/2;
         this.x = canvas.width;
         this.y = Math.random() * (canvas.height - this.height); //Math.random * (canvas.height - this.height);
         this.directionX = Math.random() * 5 + 3;
         this.directionY = Math.random() * 5 - 2.5;
         this.markedForDeletion = false;
+        this.image = new Image();
+        this.image.src = 'raven.png';
     }
     update() {
         this.x -= this.directionX;
         if (this.x < 0 - this.width) this.markedForDeletion = true;
     }
     draw() {
-        ctx.fillRect(this.x, this.y, this.width, this.height);
+        // ctx.strokeRect(this.x, this.y, this.width, this.height);
+        ctx.drawImage(this.image, 0, 0, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height);
+
     }
 }
 
