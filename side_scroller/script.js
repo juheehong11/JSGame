@@ -40,7 +40,7 @@ window.addEventListener("load", function() {
             this.frameY = 0;
             this.speed = 0;
             this.vy = 0;
-            this.weight = 0;
+            this.weight = 1;
         }
         draw(context) {
             context.fillStyle = "white";
@@ -51,7 +51,7 @@ window.addEventListener("load", function() {
             // Controls
             if (input.keys.indexOf("ArrowRight") > -1) this.speed = 5;
             else if (input.keys.indexOf("ArrowLeft") > -1) this.speed = -5; 
-            else if (input.keys.indexOf("ArrowUp") > -1 && this.onGround()) this.vy -= 10; 
+            else if (input.keys.indexOf("ArrowUp") > -1 && this.onGround()) this.vy -= 32; 
             else this.speed = 0;
 
             // Horizontal Movement
@@ -62,11 +62,11 @@ window.addEventListener("load", function() {
             // Vertical Movement
             this.y += this.vy;
             if (!this.onGround()) {
-                console.log("in air")
                 this.vy += this.weight;
+                this.frameY = 1;
             } else {
-                console.log("on ground")
                 this.vy = 0;
+                this.frameY = 0;
             }
             if (this.y > this.gameHeight - this.height) {
                 this.y = this.gameHeight - this.height;
@@ -78,7 +78,10 @@ window.addEventListener("load", function() {
     }
     
     class Background {
-
+        constructor(gameWidth, gameHeight) {
+            this.gameWidth = gameWidth;
+            this.gameHeight = gameHeight;
+        }
     }
 
     class Enemy {
