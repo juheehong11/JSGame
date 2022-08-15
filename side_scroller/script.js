@@ -35,13 +35,45 @@ window.addEventListener("load", function() {
             this.height = 200;
             this.x = 10;
             this.y = this.gameHeight - this.height;
+            this.image = document.getElementById("playerImage");
+            this.frameX = 0;
+            this.frameY = 0;
+            this.speed = 0;
+            this.vy = 0;
+            this.weight = 0;
         }
         draw(context) {
             context.fillStyle = "white";
             context.fillRect(this.x, this.y, this.width, this.height);
+            context.drawImage(this.image, this.frameX * this.width, this.frameY * this.height, this.width, this.height, this.x, this.y, this.width, this.height);
         }
-        update() {
-            this.x++;
+        update(input) {
+            // Controls
+            if (input.keys.indexOf("ArrowRight") > -1) this.speed = 5;
+            else if (input.keys.indexOf("ArrowLeft") > -1) this.speed = -5; 
+            else if (input.keys.indexOf("ArrowUp") > -1 && this.onGround()) this.vy -= 10; 
+            else this.speed = 0;
+
+            // Horizontal Movement
+            this.x += this.speed;
+            if (this.x < 0) this.x = 0;
+            else if (this.x > this.gameWidth - this.width) this.x = this.gameWidth - this.width;
+
+            // Vertical Movement
+            this.y += this.vy;
+            if (!this.onGround()) {
+                console.log("in air")
+                this.vy += this.weight;
+            } else {
+                console.log("on ground")
+                this.vy = 0;
+            }
+            if (this.y > this.gameHeight - this.height) {
+                this.y = this.gameHeight - this.height;
+            }
+        }
+        onGround() {
+            return this.y >= this.gameHeight - this.height;
         }
     }
     
@@ -67,7 +99,7 @@ window.addEventListener("load", function() {
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         player.draw(ctx);
-        player.update();
+        player.update(input);
         requestAnimationFrame(animate);
     }
     animate();
